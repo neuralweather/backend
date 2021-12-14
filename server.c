@@ -212,8 +212,12 @@ int main(int argc, char** argv) {
 
     // create the server
     http_server_t* server = http_server_new();
+
+    // register the route handlers
     http_server_add_handler(server, "/", handle_index);
     http_server_add_handler(server, "/data", handle_data);
+
+    // finally run the server on the specified host and port
     http_server_run(server, argv[1], atoi(argv[2]));
 
     // http_server_run is not supposed to return and process termination
