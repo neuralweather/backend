@@ -65,9 +65,9 @@ void http_server_handle_connection(http_thread_args_t* args) {
         }
     }
 
-after_loop:
-
     http_response_t* response;
+
+after_loop:
 
     if (callback != NULL) {
         response = callback(request);
