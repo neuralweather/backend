@@ -166,6 +166,15 @@ http_response_t* handle_data(http_request_t* request) {
     }
 }
 
+http_response_t* handle_index(http_request_t* request) {
+    return HTTP_RESPONSE(
+        "Not too much to see here, you should take a look at our "
+        "<a href=\"https://github.com/neuralweather\">Github organization</a> for "
+        "more information on the project.<br>The purpose of this webserver is to provide "
+        "the /data route which is used by the app and the microcontroller.",
+        HTTP_STATUS_OK, HTTP_HEADERS(("Content-Type", "text/html")));
+}
+
 int main(int argc, char** argv) {
 
     // second argv: host
@@ -203,6 +212,7 @@ int main(int argc, char** argv) {
 
     // create the server
     http_server_t* server = http_server_new();
+    http_server_add_handler(server, "/", handle_index);
     http_server_add_handler(server, "/data", handle_data);
     http_server_run(server, argv[1], atoi(argv[2]));
 
